@@ -15,3 +15,4 @@ class UserForm2(Form):
         validators.DataRequired(message='El correo es requerido'),
         validators.Email(message='Ingrese un correo valido')
     ])
+    
