@@ -10,7 +10,7 @@ from flask_migrate import Migrate
 app = Flask(__name__)
 app.config.from_object(DevelopmentConfig)
 csrf=CSRFProtect()
-
+db.init_app(app)
 migrate=Migrate(app, db)
 
 @app.errorhandler(404)
@@ -29,8 +29,9 @@ def alumnos():
 	create_form=forms.UserForm2(request.form)
 	if request.method=='POST':
 		alumno=Alumnos(nombre=create_form.nombre.data, 
-			apaterno=create_form.apaterno.data, 
-			email=create_form.email.data)
+			apellidos=create_form.apellidos.data, 
+			email=create_form.email.data,
+			telefono=create_form.telefono.data)
 		db.session.add(alumno)
 		db.session.commit()
 		return redirect(url_for('index'))
@@ -45,10 +46,11 @@ def detalles():
 		alumno=db.session.query(Alumnos).filter(Alumnos.id==id).first()
 		id=request.args.get('id')
 		nombre=alumno.nombre
-		apaterno=alumno.apaterno
+		apellidos=alumno.apellidos
 		email=alumno.email
+		telefono=alumno.telefono
 		
-		return render_template('detalles.html', id=id, nombre=nombre, apaterno=apaterno, email=email)
+		return render_template('detalles.html', id=id, nombre=nombre, apellidos=apellidos, email=email, telefono=telefono)
 
 @app.route("/modificar", methods=['GET', 'POST'])
 def modificar():
@@ -58,15 +60,17 @@ def modificar():
 		alum1=db.session.query(Alumnos).filter(Alumnos.id==id).first()
 		create_form.id.data=request.args.get('id')
 		create_form.nombre.data=str.rstrip(alum1.nombre)
-		create_form.apaterno.data=alum1.apaterno
+		create_form.apellidos.data=alum1.apellidos
 		create_form.email.data=alum1.email
+		create_form.telefono.data=alum1.telefono
 	if request.method=='POST':
 		id=create_form.id.data
 		alum1=db.session.query(Alumnos).filter(Alumnos.id==id).first()
 		alum1.id=id
 		alum1.nombre=str.rstrip(create_form.nombre.data)
-		alum1.apaterno=create_form.apaterno.data
+		alum1.apellidos=create_form.apellidos.data
 		alum1.email=create_form.email.data
+		alum1.telefono=create_form.telefono.data
 		db.session.add(alum1)
 		db.session.commit()
 		return redirect(url_for('index'))
@@ -80,8 +84,9 @@ def eliminar():
 		alum1=db.session.query(Alumnos).filter(Alumnos.id==id).first()
 		create_form.id.data=request.args.get('id')
 		create_form.nombre.data=str.rstrip(alum1.nombre)
-		create_form.apaterno.data=alum1.apaterno
+		create_form.apellidos.data=alum1.apellidos
 		create_form.email.data=alum1.email
+		create_form.telefono.data=alum1.telefono
 		return render_template('eliminar.html', form=create_form)
 
 	if request.method=='POST':
@@ -95,7 +100,4 @@ def eliminar():
 
 if __name__ == '__main__':
 	csrf.init_app(app)
-	db.init_app(app)
-	with app.app_context():
-		db.create_all()
 	app.run(port=5002)

@@ -29,7 +29,7 @@
                 focus:ring-0 focus:border-blue-600 peer', placeholder='Ingresa tu nombre', required=True)}}
             </div>
             <div class="relative z-0 w-full mb-6 group">
-                {{macros.campoNuevo(form.apaterno,
+                {{macros.campoNuevo(form.apellidos,
                 class='form-control block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0
                 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0
                 focus:border-blue-600 peer', placeholder='Ingresa tu apellido paterno', required=True)}}
@@ -41,6 +41,12 @@
             class='form-control block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0
             border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0
             focus:border-blue-600 peer', placeholder='Ingresa tu correo', required=True)}}
+        </div>
+        <div class="relative z-0 w-full mb-8 group">
+            {{macros.campoNuevo(form.telefono,
+            class='form-control block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0
+            border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0
+            focus:border-blue-600 peer', placeholder='Ingresa tu telefono', required=True)}}
         </div>
 
         <div class="flex gap-4">
