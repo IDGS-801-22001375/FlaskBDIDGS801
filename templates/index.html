@@ -4,73 +4,67 @@
 
 <script src="https://cdn.tailwindcss.com"></script>
 
-<div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
-    <button class="text-white bg-blue-700 box-border border border-transparent hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 
-            shadow-xs font-medium leading-5 rounded-lg text-sm px-4 py-2.5 focus:outline-none
-            m-5">
-        <a href="{{url_for('alumnos')}}">Agregar Alumno</a>
-    </button>
-    <table class="w-full text-sm text-left rtl:text-right text-body">
-        <thead class="text-sm text-body bg-neutral-secondary-soft border-b rounded-base border-default">
-            <tr>
-                <th scope="col" class="px-6 py-3 font-medium">
-                    Nombre
-                </th>
-                <th scope="col" class="px-6 py-3 font-medium">
-                    Apellidos
-                </th>
-                <th scope="col" class="px-6 py-3 font-medium">
-                    Email
-                </th>
-                <th scope="col" class="px-6 py-3 font-medium">
-                    Telefono
-                </th>
-                <th scope="col" class="px-6 py-3 font-medium">
-                    Ver Detalles
-                </th>
-                <th scope="col" class="px-6 py-3 font-medium">
-                    Acciones
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for alumno in alumnos %}
-            <tr class="bg-neutral-primary border-b border-default">
-                <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                    {{ alumno.nombre }}
-                </th>
-                <td class="px-6 py-4">
-                    {{ alumno.apellidos }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ alumno.email }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ alumno.telefono }}
-                </td>
-                <th scope="col" class="px-6 py-3 font-medium">
-                    <button type="button"
-                        class="text-white bg-gray-800 box-border border border-transparent hover:bg-gray-900 focus:ring-4 
-                        focus:ring-gray-300 shadow-xs font-medium leading-5 rounded-lg text-sm px-4 py-2.5 focus:outline-none">
-                        <a href="detalles?id={{alumno.id}}">Ver Detalles</a>
-                    </button>
-                </th>
-                <td class="px-6 py-4">
-                    <button type="button"
-                        class="text-white bg-red-800 box-border border border-transparent hover:bg-red-900 focus:ring-4 
-                        focus:ring-red-300 shadow-xs font-medium leading-5 rounded-lg text-sm px-4 py-2.5 focus:outline-none">
-                        <a href="eliminar?id={{alumno.id}}">Eliminar</a>
-                    </button>
-                    <button type="button"
-                        class="text-white bg-yellow-800 box-border border border-transparent hover:bg-yellow-900 focus:ring-4 
-                        focus:ring-yellow-300 shadow-xs font-medium leading-5 rounded-lg text-sm px-4 py-2.5 focus:outline-none">
-                        <a href="modificar?id={{alumno.id}}">Modificar</a>
-                    </button>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="min-h-screen bg-white">
+
+    <!-- Hero elegante -->
+    <section class="max-w-5xl mx-auto px-6 py-20 text-center">
+        <h2 class="text-4xl md:text-5xl font-light text-gray-900 mb-6">
+            Plataforma de Gestión Académica
+        </h2>
+        <p class="text-lg text-gray-500 max-w-2xl mx-auto">
+            Administra maestros, alumnos y cursos desde un entorno moderno, claro y eficiente.
+        </p>
+    </section>
+
+    <!-- Secciones principales -->
+    <section class="max-w-6xl mx-auto px-6 pb-20">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+            <!-- Card -->
+            <div
+                class="group border border-gray-200 rounded-2xl p-10 hover:shadow-xl hover:-translate-y-1 transition duration-300">
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">
+                    Maestros
+                </h3>
+                <p class="text-gray-500 mb-6">
+                    Gestiona la información y asignaciones del personal docente.
+                </p>
+                <a href="{{ url_for('maestros.lista_maestros') }}"
+                    class="text-black font-medium border-b border-black pb-1 hover:opacity-70 transition">
+                    Administrar →
+                </a>
+            </div>
+
+            <div
+                class="group border border-gray-200 rounded-2xl p-10 hover:shadow-xl hover:-translate-y-1 transition duration-300">
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">
+                    Alumnos
+                </h3>
+                <p class="text-gray-500 mb-6">
+                    Controla registros, inscripciones y seguimiento académico.
+                </p>
+                <a href="{{ url_for('alumnos.lista_alumnos') }}"
+                    class="text-black font-medium border-b border-black pb-1 hover:opacity-70 transition">
+                    Administrar →
+                </a>
+            </div>
+
+            <div
+                class="group border border-gray-200 rounded-2xl p-10 hover:shadow-xl hover:-translate-y-1 transition duration-300">
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">
+                    Cursos
+                </h3>
+                <p class="text-gray-500 mb-6">
+                    Organiza materias, horarios y asignaciones académicas.
+                </p>
+                <a href="#" class="text-black font-medium border-b border-black pb-1 hover:opacity-70 transition">
+                    Administrar →
+                </a>
+            </div>
+
+        </div>
+    </section>
+
 </div>
 
 {% endblock %}

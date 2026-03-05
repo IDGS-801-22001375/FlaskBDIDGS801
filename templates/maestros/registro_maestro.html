@@ -8,7 +8,7 @@
 <div class="w-full max-w-lg p-8 bg-white border border-gray-200 rounded-2xl shadow-xl">
 
     <div class="mb-8 text-center">
-        <h2 class="text-2xl font-bold text-gray-900">Registro de Usuario</h2>
+        <h2 class="text-2xl font-bold text-gray-900">Registro de Maestros</h2>
         <p class="text-gray-500 text-sm">Completa los datos para darte de alta en el sistema.</p>
     </div>
 
@@ -16,6 +16,12 @@
         {{ form.csrf_token }}
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="grid md:grid-cols-2 md:gap-6">
+            <div class="relative z-0 w-full mb-8 group">
+                {{macros.campoNuevo(form.matricula,
+                class='form-control block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0
+                border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0
+                focus:border-blue-600 peer', placeholder='Ingresa tu matricula', required=True)}}
+            </div>
             <div class="relative z-0 w-full mb-6 group">
                 {{macros.campoNuevo(form.nombre,
                 class='form-control block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent
@@ -28,6 +34,12 @@
                 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0
                 focus:border-blue-600 peer', placeholder='Ingresa tu apellido paterno', required=True)}}
             </div>
+            <div class="relative z-0 w-full mb-8 group">
+                {{macros.campoNuevo(form.especialidad,
+                class='form-control block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0
+                border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0
+                focus:border-blue-600 peer', placeholder='Ingresa tu especialidad', required=True)}}
+            </div>
         </div>
 
         <div class="relative z-0 w-full mb-8 group">
@@ -36,12 +48,6 @@
             border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0
             focus:border-blue-600 peer', placeholder='Ingresa tu correo', required=True)}}
         </div>
-        <div class="relative z-0 w-full mb-8 group">
-            {{macros.campoNuevo(form.telefono,
-            class='form-control block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0
-            border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0
-            focus:border-blue-600 peer', placeholder='Ingresa tu telefono', required=True)}}
-        </div>
 
         <div class="flex gap-4">
             <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none 
@@ -49,7 +55,7 @@
             duration-200" id="btn1" name="btn1">
                 Registrar Ahora
             </button>
-            <a href="{{ url_for('index') }}" class="w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none 
+            <a href="{{ url_for('maestros.lista_maestros') }}" class="w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none 
             focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-3 text-center transition-all 
             duration-200" id="btn2" name="btn2">
                 Cancelar

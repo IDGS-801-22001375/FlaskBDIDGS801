@@ -1,0 +1,92 @@
+{% extends 'layout.html' %}
+
+{% block container %}
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
+    <button class="text-white bg-blue-700 box-border border border-transparent hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 
+            shadow-xs font-medium leading-5 rounded-lg text-sm px-4 py-2.5 focus:outline-none
+            m-5">
+        <a href="{{url_for('maestros.registro_maestro')}}">Agregar Mestro</a>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </button>
+    <table class="w-full text-sm text-left rtl:text-right text-body">
+        <thead class="text-sm text-body bg-neutral-secondary-soft border-b rounded-base border-default">
+            <tr>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Nombre
+                </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Apellidos
+                </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Email
+                </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Matricula
+                </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Especialidad
+                </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Ver Detalles
+                </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for maestro in maestros %}
+            <tr class="bg-neutral-primary border-b border-default">
+                <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+                    {{ maestro.nombre }}
+                </th>
+                <td class="px-6 py-4">
+                    {{ maestro.apellidos }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ maestro.email }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ maestro.matricula }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ maestro.especialidad }}
+                </td>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    <button type="button"
+                        class="text-white bg-gray-800 box-border border border-transparent hover:bg-gray-900 focus:ring-4 
+                        focus:ring-gray-300 shadow-xs font-medium leading-5 rounded-lg text-sm px-4 py-2.5 focus:outline-none">
+                        <a href="{{ url_for('maestros.detalles_maestro', matricula=maestro.matricula) }}">Ver
+                            Detalles</a>
+                    </button>
+                </th>
+                <td class="px-6 py-4">
+                    <button type="button"
+                        class="text-white bg-red-800 box-border border border-transparent hover:bg-red-900 focus:ring-4 
+                        focus:ring-red-300 shadow-xs font-medium leading-5 rounded-lg text-sm px-4 py-2.5 focus:outline-none">
+                        <a href="{{ url_for('maestros.eliminar_maestro', matricula=maestro.matricula) }}">Eliminar</a>
+                    </button>
+                    <button type="button"
+                        class="text-white bg-yellow-800 box-border border border-transparent hover:bg-yellow-900 focus:ring-4 
+                        focus:ring-yellow-300 shadow-xs font-medium leading-5 rounded-lg text-sm px-4 py-2.5 focus:outline-none">
+                        <a href="{{ url_for('maestros.modificar_maestro', matricula=maestro.matricula) }}">Modificar</a>
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
