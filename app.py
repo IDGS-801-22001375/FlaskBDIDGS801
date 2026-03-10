@@ -6,6 +6,8 @@ from config import DevelopmentConfig
 from models import db, Alumnos
 from maestros.routes import maestros
 from alumnos.routes import alumnos
+from cursos.routes import cursos
+from inscripciones.routes import inscripciones
 import forms
 
 app = Flask(__name__)
@@ -17,6 +19,8 @@ migrate = Migrate(app, db)
 
 app.register_blueprint(maestros)
 app.register_blueprint(alumnos)
+app.register_blueprint(cursos)
+app.register_blueprint(inscripciones)
 
 @app.errorhandler(404)
 def page_not_found(error):

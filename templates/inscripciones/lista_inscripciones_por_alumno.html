@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+
+{% block container %}
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<div class="min-h-screen bg-gray-50 py-10 px-6">
+    <div class="max-w-7xl mx-auto">
+
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h2 class="text-3xl font-semibold text-gray-800">Lista de cursos del Alumno</h2>
+                <p class="text-gray-500 text-sm mt-1">
+                    Gestión y control de inscripciones
+                </p>
+            </div>
+
+            <div class="flex gap-3">
+                <a href="{{ url_for('alumnos.lista_alumnos')}}"
+                    class="px-5 py-2.5 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+                    ← Regresar
+                </a>
+            </div>
+        </div>
+
+        <div class="bg-white shadow-md rounded-2xl overflow-hidden border border-gray-200">
+            <table class="w-full text-sm text-left text-gray-600">
+                <thead class="bg-gray-100 text-gray-700 uppercase text-xs tracking-wider">
+                    <tr>
+                        <th class="px-6 py-4">Alumno</th>
+                        <th class="px-6 py-4">Curso</th>
+                        <th class="px-6 py-4">Fecha de inscripción</th>
+                        <th class="px-6 py-4 text-center">Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody class="divide-y divide-gray-100">
+                    {% for inscripcion in inscripciones %}
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="px-6 py-4 font-medium text-gray-800">
+                            {{ inscripcion.alumno.nombre }} {{ inscripcion.alumno.apellidos }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ inscripcion.curso.nombre }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ inscripcion.fecha_inscripcion }}
+                        </td>
+
+                        <td class="px-6 py-4 text-center space-x-2">
+                            <a href="{{ url_for('inscripciones.lista_inscripciones', id=inscripcion.alumno.id) }}"
+                                class="px-4 py-2 bg-red-600 text-white rounded-lg text-xs hover:bg-red-700 transition">
+                                Gestionar inscripción
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

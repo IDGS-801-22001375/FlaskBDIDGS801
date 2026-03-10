@@ -9,9 +9,9 @@
 
         <div class="flex justify-between items-center mb-8">
             <div>
-                <h2 class="text-3xl font-semibold text-gray-800">Lista de Alumnos</h2>
+                <h2 class="text-3xl font-semibold text-gray-800">Lista de Cursos</h2>
                 <p class="text-gray-500 text-sm mt-1">
-                    Gestión y control de estudiantes registrados
+                    Gestión y control de cursos registrados
                 </p>
             </div>
 
@@ -21,9 +21,14 @@
                     ← Regresar
                 </a>
 
-                <a href="{{ url_for('alumnos.registro_alumno') }}"
+                <a href="{{ url_for('cursos.registrar_curso') }}"
                     class="px-5 py-2.5 bg-black text-white rounded-lg hover:opacity-80 transition shadow-sm">
-                    + Agregar Alumno
+                    + Agregar Curso
+                </a>
+
+                <a href="{{ url_for('inscripciones.lista_inscripciones') }}"
+                    class="px-5 py-2.5 bg-black text-white rounded-lg hover:opacity-80 transition shadow-sm">
+                    Ver inscripciones
                 </a>
             </div>
         </div>
@@ -33,51 +38,42 @@
                 <thead class="bg-gray-100 text-gray-700 uppercase text-xs tracking-wider">
                     <tr>
                         <th class="px-6 py-4">Nombre</th>
-                        <th class="px-6 py-4">Apellidos</th>
-                        <th class="px-6 py-4">Email</th>
-                        <th class="px-6 py-4">Teléfono</th>
+                        <th class="px-6 py-4">Descripcion</th>
+                        <th class="px-6 py-4">Maestro</th>
                         <th class="px-6 py-4 text-center">Detalles</th>
                         <th class="px-6 py-4 text-center">Acciones</th>
                     </tr>
                 </thead>
 
                 <tbody class="divide-y divide-gray-100">
-                    {% for alumno in alumnos %}
+                    {% for curso in cursos %}
                     <tr class="hover:bg-gray-50 transition">
                         <td class="px-6 py-4 font-medium text-gray-800">
-                            {{ alumno.nombre }}
+                            {{ curso.nombre }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ alumno.apellidos }}
+                            {{ curso.descripcion }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ alumno.email }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ alumno.telefono }}
+                            {{ curso.maestro.nombre }} {{ curso.maestro.apellidos }}
                         </td>
 
                         <td class="px-6 py-4 text-center">
-                            <a href="{{ url_for('alumnos.detalle_alumno', id=alumno.id) }}"
+                            <a href="{{ url_for('cursos.detalle_curso', id=curso.id) }}"
                                 class="px-4 py-2 bg-gray-900 text-white rounded-lg text-xs hover:bg-black transition">
                                 Ver
                             </a>
                         </td>
 
                         <td class="px-6 py-4 text-center space-x-2">
-                            <a href="{{ url_for('alumnos.modificar_alumno', id=alumno.id) }}"
+                            <a href="{{ url_for('cursos.modificar_curso', id=curso.id)}}"
                                 class="px-4 py-2 bg-amber-500 text-white rounded-lg text-xs hover:bg-amber-600 transition">
                                 Editar
                             </a>
 
-                            <a href="{{ url_for('alumnos.eliminar_alumno', id=alumno.id) }}"
+                            <a href="{{ url_for('cursos.eliminar_curso', id=curso.id)}}"
                                 class="px-4 py-2 bg-red-600 text-white rounded-lg text-xs hover:bg-red-700 transition">
                                 Eliminar
-                            </a>
-
-                            <a href="{{ url_for('inscripciones.registrar_inscripcion', alumno_id=alumno.id) }}"
-                                class="px-4 py-2 bg-blue-600 text-white rounded-lg text-xs hover:bg-blue-900 transition">
-                                Inscribir a curso
                             </a>
                         </td>
                     </tr>

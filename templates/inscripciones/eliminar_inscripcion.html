@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+{% block container %}
+{% import "_macros.html" as macros %}
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<div class="w-full max-w-lg p-8 bg-white border border-gray-200 rounded-2xl shadow-xl">
+
+    <div class="mb-8 text-center">
+        <h2 class="text-2xl font-bold text-gray-900">Eliminar Inscripción</h2>
+        <p class="text-gray-500 text-sm mt-1">¿Estás seguro de que deseas eliminar esta inscripción?</p>
+    </div>
+
+    <form action="" method="POST" novalidate>
+        {{ form.csrf_token }}
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="id" value="{{ form.id.data }}">
+
+        <div class="grid md:grid-cols-2 md:gap-6">
+
+            <div class="relative z-0 w-full mb-6 group">
+                <label class="block text-sm font-medium text-gray-900">Alumno</label>
+                <input type="text" value="{{ alumno }}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0
+                    border-b-2 border-gray-300 focus:outline-none" readonly>
+            </div>
+
+            <div class="relative z-0 w-full mb-6 group">
+                <label class="block text-sm font-medium text-gray-900">Curso</label>
+                <input type="text" value="{{ curso }}" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0
+                    border-b-2 border-gray-300 focus:outline-none" readonly>
+            </div>
+
+        </div>
+
+        <div class="flex gap-4">
+            <button type="submit" class="w-full text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none 
+                focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-3 text-center transition-all duration-200">
+                Eliminar
+            </button>
+            <a href="{{ url_for('inscripciones.lista_inscripciones') }}"
+                class="w-full text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none 
+                focus:ring-gray-300 font-semibold rounded-lg text-sm px-5 py-3 text-center transition-all duration-200">
+                Cancelar
+            </a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,4 +1,4 @@
-from wtforms import IntegerField, StringField, EmailField
+from wtforms import IntegerField, StringField, EmailField, SelectField
 from wtforms import Form, validators
 
 class UserForm2(Form):
@@ -38,4 +38,29 @@ class UserFormMestros(Form):
     especialidad=StringField('especialidad',[
         validators.DataRequired(message='La especialidad es requerida'),
         validators.number_range(min=7, message='Ingrese una especialidad valida')
+    ])
+
+class UserFormCursos(Form):
+    id=IntegerField('id',[
+        validators.number_range(min=1, max=20, message='Valor no valido')
+    ])
+    nombre=StringField('nombre',[
+        validators.DataRequired(message='El nombre es requerido')
+    ])
+    descripcion=StringField('descripcion',[
+        validators.DataRequired(message='La descripcion es requerida')
+    ])
+    maestro=SelectField('maestro',[
+        validators.DataRequired(message='Seleccione un maestro'),
+    ])
+
+class UserFormInscripciones(Form):
+    id=IntegerField('id',[
+        validators.number_range(min=1, max=20, message='Valor no valido')
+    ])
+    alumno=SelectField('alumno',[
+        validators.DataRequired(message='Seleccione un alumno'),
+    ])
+    curso=SelectField('curso',[
+        validators.DataRequired(message='Seleccione un curso'),
     ])
